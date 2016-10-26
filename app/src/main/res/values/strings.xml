@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">DataController</string>
+    <string name="add_user">ADD USER</string>
+    <string name="read_user">READ USER</string>
+</resources>
