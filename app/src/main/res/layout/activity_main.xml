@@ -20,6 +20,14 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:onClick="readUser"
         android:text="@string/read_user" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:onClick="updateUser"
+        android:text="@string/update_user" />
 </LinearLayout>

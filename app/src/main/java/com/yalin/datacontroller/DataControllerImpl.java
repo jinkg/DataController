@@ -1,6 +1,7 @@
 package com.yalin.datacontroller;
 
 import com.yalin.datacontroller.javalib.MaybeConsumer;
+import com.yalin.datacontroller.javalib.Success;
 import com.yalin.datacontroller.metadata.MetaDataManager;
 import com.yalin.datacontroller.metadata.User;
 
@@ -41,6 +42,17 @@ public class DataControllerImpl implements DataController {
             @Override
             public List<User> call() throws Exception {
                 return mMetaDataManager.readUsers();
+            }
+        });
+    }
+
+    @Override
+    public void updateUser(final User newUser, MaybeConsumer<Success> onSuccess) {
+        background(mMetaDataThread, onSuccess, new Callable<Success>() {
+            @Override
+            public Success call() throws Exception {
+                mMetaDataManager.updateUser(newUser);
+                return Success.SUCCESS;
             }
         });
     }

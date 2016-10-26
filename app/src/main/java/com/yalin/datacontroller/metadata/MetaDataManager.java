@@ -12,5 +12,7 @@ public interface MetaDataManager {
 
     List<User> readUsers();
 
+    void updateUser(User newUser);
+
     void close();
 }

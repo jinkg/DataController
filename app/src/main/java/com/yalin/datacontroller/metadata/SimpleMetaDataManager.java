@@ -81,6 +81,17 @@ public class SimpleMetaDataManager implements MetaDataManager {
         return users;
     }
 
+    @Override
+    public void updateUser(User newUser) {
+        ContentValues values = new ContentValues();
+        values.put(UserColumns.USER_NAME, newUser.name);
+        values.put(UserColumns.USER_AGE, newUser.age);
+        synchronized (mLock) {
+            final SQLiteDatabase db = mDbHelper.getWritableDatabase();
+            db.update(Tables.USERS, values, BaseColumns._ID + "=?", new String[]{String.valueOf(newUser.id)});
+        }
+    }
+
     public interface UserColumns {
         String USER_NAME = "user_name";
         String USER_AGE = "user_age";

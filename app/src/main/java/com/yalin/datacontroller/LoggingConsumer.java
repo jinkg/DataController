@@ -1,6 +1,7 @@
 package com.yalin.datacontroller;
 
 import com.yalin.datacontroller.javalib.MaybeConsumer;
+import com.yalin.datacontroller.javalib.Success;
 import com.yalin.datacontroller.log.StatLog;
 
 /**
@@ -9,6 +10,15 @@ import com.yalin.datacontroller.log.StatLog;
  */
 
 public abstract class LoggingConsumer<T> implements MaybeConsumer<T> {
+    public static <T> LoggingConsumer<T> expectSuccess(String tag, String operation) {
+        return new LoggingConsumer<T>(tag, operation) {
+            @Override
+            public void success(T value) {
+                // do nothing
+            }
+        };
+    }
+
     private final String mTag;
     private final String mOperation;
 

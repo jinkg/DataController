@@ -1,6 +1,7 @@
 package com.yalin.datacontroller;
 
 import com.yalin.datacontroller.javalib.MaybeConsumer;
+import com.yalin.datacontroller.javalib.Success;
 import com.yalin.datacontroller.metadata.User;
 
 import java.util.List;
@@ -14,4 +15,6 @@ public interface DataController {
     void addUser(User user, MaybeConsumer<User> onSuccess);
 
     void readUsers(MaybeConsumer<List<User>> onSuccess);
+
+    void updateUser(User newUser, MaybeConsumer<Success> onSuccess);
 }
