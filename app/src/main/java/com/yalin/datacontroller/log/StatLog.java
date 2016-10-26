@@ -35,13 +35,14 @@ public class StatLog {
         String stackTraces = formatStackTrance(throwable.getStackTrace());
         Throwable cause = throwable.getCause();
         if (cause != null) {
+            stackTraces = stackTraces + "cause:\n";
             stackTraces = stackTraces
                     + formatStackTrance(cause.getStackTrace());
         }
         if (msg == null) {
             msg = "";
         }
-        printLog(tag, msg + " : " + stackTraces);
+        printLog(tag, msg + " : " + throwable.getMessage() + "\n" + stackTraces);
     }
 
     public static void printLog(String tag, String msg) {

@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void addUser(View view) {
         User user = new User();
-        user.name = "yalin1";
+        user.name = "Yalin1";
         user.age = 26;
 
         AppSingleton.getInstance(this).getDataController().addUser(user,
@@ -62,6 +62,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void updateUserName(View view) {
-        AppSingleton.getInstance(this).getUserDataController().renameUser("Yalin", "yalin");
+        AppSingleton.getInstance(this).getUserDataController().renameUser("Yalin1", "yalin");
     }
 }

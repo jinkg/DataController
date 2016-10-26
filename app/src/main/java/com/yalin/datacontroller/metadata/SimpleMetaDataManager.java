@@ -117,10 +117,11 @@ public class SimpleMetaDataManager implements MetaDataManager {
     @Override
     public void updateUserName(String name, String newName) {
         User user = loadUserByName(name);
-        if (user != null) {
-            user.name = newName;
-            updateUser(user);
+        if (user == null) {
+            throw new IllegalStateException("The user: " + name + " is not exist.");
         }
+        user.name = newName;
+        updateUser(user);
     }
 
     public interface UserColumns {
