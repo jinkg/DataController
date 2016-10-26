@@ -58,6 +58,28 @@ public class SimpleMetaDataManager implements MetaDataManager {
     }
 
     @Override
+    public User loadUserByName(String name) {
+        synchronized (mLock) {
+            final SQLiteDatabase db = mDbHelper.getReadableDatabase();
+
+            Cursor cursor = null;
+            try {
+                cursor = db.query(Tables.USERS, UserColumns.GET_COLUMNS,
+                        UserColumns.USER_NAME + " = ?",
+                        new String[]{name}, null, null, null);
+                if (cursor.moveToNext()) {
+                    return createUserFromCursor(cursor);
+                }
+            } finally {
+                if (cursor != null) {
+                    cursor.close();
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
     public List<User> readUsers() {
         List<User> users = new ArrayList<>();
         synchronized (mLock) {
@@ -89,6 +111,15 @@ public class SimpleMetaDataManager implements MetaDataManager {
         synchronized (mLock) {
             final SQLiteDatabase db = mDbHelper.getWritableDatabase();
             db.update(Tables.USERS, values, BaseColumns._ID + "=?", new String[]{String.valueOf(newUser.id)});
+        }
+    }
+
+    @Override
+    public void updateUserName(String name, String newName) {
+        User user = loadUserByName(name);
+        if (user != null) {
+            user.name = newName;
+            updateUser(user);
         }
     }
 

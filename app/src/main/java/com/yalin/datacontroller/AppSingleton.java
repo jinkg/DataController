@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 
+import com.yalin.datacontroller.javalib.FailureListener;
 import com.yalin.datacontroller.metadata.SimpleMetaDataManager;
 
 import java.util.concurrent.Executor;
@@ -17,12 +18,13 @@ import java.util.concurrent.Executors;
  */
 
 public class AppSingleton {
-    private DataController mDataController;
     @SuppressLint("StaticFieldLeak")
     private static AppSingleton sInstance;
     private final Context mApplicationContext;
+    private DataController mDataController;
 
     private static Executor sUiThreadExecutor = null;
+    private static UserDataController mUserDataController;
 
     public DataController getDataController() {
         if (mDataController == null) {
@@ -52,6 +54,19 @@ public class AppSingleton {
             sInstance = new AppSingleton(context);
         }
         return sInstance;
+    }
+
+    public UserDataController getUserDataController() {
+        if (mUserDataController == null) {
+            mUserDataController = new UserDataController(getDataController(),
+                    new UserDataController.FailureListenerFactory() {
+                        @Override
+                        public FailureListener makeListenerForOperation(String operation) {
+                            return LoggingConsumer.logFailure(operation);
+                        }
+                    });
+        }
+        return mUserDataController;
     }
 
     private AppSingleton(Context context) {

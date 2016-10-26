@@ -17,4 +17,6 @@ public interface DataController {
     void readUsers(MaybeConsumer<List<User>> onSuccess);
 
     void updateUser(User newUser, MaybeConsumer<Success> onSuccess);
+
+    void updateUserName(String currentName,String newName,MaybeConsumer<Success> onSuccess);
 }

@@ -3,4 +3,5 @@
     <string name="add_user">ADD USER</string>
     <string name="read_user">READ USER</string>
     <string name="update_user">UPDATE USER</string>
+    <string name="update_user_name_by_user_controller">UPDATE USER NAME BY USER CONTROLLER</string>
 </resources>

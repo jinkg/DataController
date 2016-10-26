@@ -30,4 +30,11 @@
         android:layout_marginTop="5dp"
         android:onClick="updateUser"
         android:text="@string/update_user" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:onClick="updateUserName"
+        android:text="@string/update_user_name_by_user_controller" />
 </LinearLayout>

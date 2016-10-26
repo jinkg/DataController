@@ -60,4 +60,8 @@ public class MainActivity extends AppCompatActivity {
                 LoggingConsumer.<Success>expectSuccess(TAG, "update user")
         );
     }
+
+    public void updateUserName(View view) {
+        AppSingleton.getInstance(this).getUserDataController().renameUser("Yalin", "yalin");
+    }
 }

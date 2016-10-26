@@ -10,9 +10,13 @@ import java.util.List;
 public interface MetaDataManager {
     long addUser(User user);
 
+    User loadUserByName(String name);
+
     List<User> readUsers();
 
     void updateUser(User newUser);
+
+    void updateUserName(String name, String newName);
 
     void close();
 }

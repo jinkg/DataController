@@ -57,6 +57,17 @@ public class DataControllerImpl implements DataController {
         });
     }
 
+    @Override
+    public void updateUserName(final String currentName, final String newName, MaybeConsumer<Success> onSuccess) {
+        background(mMetaDataThread, onSuccess, new Callable<Success>() {
+            @Override
+            public Success call() throws Exception {
+                mMetaDataManager.updateUserName(currentName, newName);
+                return Success.SUCCESS;
+            }
+        });
+    }
+
     private <T> void background(Executor dataThread, final MaybeConsumer<T> onSuccess,
                                 final Callable<T> job) {
         dataThread.execute(new Runnable() {

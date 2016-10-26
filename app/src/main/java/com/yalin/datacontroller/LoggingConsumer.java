@@ -1,5 +1,6 @@
 package com.yalin.datacontroller;
 
+import com.yalin.datacontroller.javalib.FailureListener;
 import com.yalin.datacontroller.javalib.MaybeConsumer;
 import com.yalin.datacontroller.javalib.Success;
 import com.yalin.datacontroller.log.StatLog;
@@ -15,6 +16,17 @@ public abstract class LoggingConsumer<T> implements MaybeConsumer<T> {
             @Override
             public void success(T value) {
                 // do nothing
+            }
+        };
+    }
+
+    public static FailureListener logFailure(final String operation) {
+        return new FailureListener() {
+            private static final String TAG = "logFailure";
+
+            @Override
+            public void fail(Exception e) {
+                StatLog.printLog(TAG, "Failed: " + operation, e);
             }
         };
     }
